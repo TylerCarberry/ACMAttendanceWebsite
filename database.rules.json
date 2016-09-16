@@ -1,0 +1,33 @@
+{
+  "rules": {
+    
+    "signed_in_count": {
+      ".read": "true",
+    	".write": "false"
+    },
+      
+    "first_meeting_count": {
+      ".read": "true",
+    	".write": "false"
+    },
+    "comment": {
+      ".read": "true",
+    	".write": "false"
+    },
+    "yes_count": {
+      ".read": "true",
+    	".write": "false"
+    },
+    "no_count": {
+      ".read": "true",
+    	".write": "false"
+    },
+    "other_count": {
+      ".read": "true",
+    	".write": "false"
+    },
+    
+    ".read": "true",
+    ".write": "true"
+  }
+}
