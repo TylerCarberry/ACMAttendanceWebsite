@@ -1,3 +1,10 @@
+<head 
+	<meta charset = "utf-8" />
+	<title>ACM Sign-In</title>
+    <link rel="shortcut icon" href="Logo.png">
+    <link rel="stylesheet" href="StyleSheets/Main.css">
+</head>
+
 <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
 <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase-auth.js"></script>
@@ -12,22 +19,6 @@
   google.charts.setOnLoadCallback(null);
 </script>
 
-<style type="text/css">
- .topcorner{
-   position:absolute;
-   top:0;
-   right:0;
-   font-size: 50pt;
-   width: 600px;
-  }
-   
-</style>
-<style>
- body{
- background-color: aquamarine;
-    }
-   
-</style>
 
 <H1 id="title" onclick="drawChart(1,2,3)">Sign in to the meeting: <a href="https://goo.gl/ZwVVrM">goo.gl/ZwVVrM</a>
     or <img src="https://goo.gl/ZwVVrM.qr" alt="QR Code" width="150" height="150">
@@ -36,7 +27,7 @@
 <H2 id="signed_in">How many people signed into this meeting: Unknown</H2>
 <H2 id="first_meeting">Number of new members: Unknown</H2>
 
-<div id="piechart" style="width: 600px; height: 300px; "></div>
+<div id="piechart" ></div>
 
 <script>
   // This is my first time ever writing Javascript or HTML from scratch.
