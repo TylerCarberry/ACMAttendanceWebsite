@@ -1,0 +1,60 @@
+<head 
+	<meta charset = "utf-8" />
+	<title>ACM Sign-In</title>
+    <link rel="shortcut icon" href="Logo.png">
+    <link rel="stylesheet" href="StyleSheets/Main.css">
+</head>
+
+<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase-database.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi?autoload= 
+{'modules':[{'name':'visualization','version':'1.1','packages':
+['corechart']}]}"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load('current', {packages: ['corechart']});
+  google.charts.setOnLoadCallback(null);
+</script>
+
+<script>
+
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyAQCEhRC7wf8iCyEW1puwteuWMP5EP7U14",
+        authDomain: "acm-attendance.firebaseapp.com",
+        databaseURL: "https://acm-attendance.firebaseio.com",
+        storageBucket: "acm-attendance.appspot.com",
+    };
+    firebase.initializeApp(config);
+    
+    
+    function vote(team) {
+        if(team === "game" || team === "android" || team === "ai" ||
+                team === "web" || team === "acmw" || team === "cpc") {
+        
+            // Increment Ada's rank by 1.
+            var adaRankRef = firebase.database().ref('vote/' + team);
+            adaRankRef.transaction(function(currentRank) {
+                // If users/ada/rank has never been set, currentRank will be `null`.
+                return currentRank + 1;
+            });
+    
+        //alert(team);
+            
+    }
+  
+  }
+</script>
+
+<H1>Which committee is better?</H1>
+<button type="button" onclick="vote('game')">Animation/Game Design</button>
+<button type="button" onclick="vote('android')">Android</button>
+<button type="button" onclick="vote('ai')">AI</button>
+<button type="button" onclick="vote('web')">Web Dev</button>
+<button type="button" onclick="vote('acmw')">ACM-W</button>
+<button type="button" onclick="vote('cpc')">CPC</button>
+
+
