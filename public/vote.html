@@ -35,14 +35,12 @@
         if(team === "game" || team === "android" || team === "ai" ||
                 team === "web" || team === "acmw" || team === "cpc") {
         
-            // Increment Ada's rank by 1.
-            var adaRankRef = firebase.database().ref('vote/' + team);
-            adaRankRef.transaction(function(currentRank) {
-                // If users/ada/rank has never been set, currentRank will be `null`.
+            // Increment votes
+            var voteRef = firebase.database().ref('vote/' + team);
+            voteRef.transaction(function(currentRank) {
+                // If it has never been set, currentRank will be `null`.
                 return currentRank + 1;
             });
-    
-        //alert(team);
             
     }
   
