@@ -34,28 +34,52 @@
   })
   
   
-  var spaces_count = 0;
-  var tabs_count = 0;
-  var what_count = 0;
+  var vote_game = 0;
+  var vote_android = 0;
+  var vote_web = 0;
+  var vote_acmw = 0;
+  var vote_ai = 0;
+  var vote_cpc = 0;
   
-  // SPACES
-  var number = firebase.database().ref('spaces_count/');
+  // GAME
+  var number = firebase.database().ref('vote/game');
   number.on('value', function(snapshot) {
-    yes_count = snapshot.val();
+    vote_game = snapshot.val();
     drawChart();
   })
   
-  // TABS
-  var number = firebase.database().ref('tabs_count/');
+  // ANDROID
+  var number = firebase.database().ref('vote/android');
   number.on('value', function(snapshot) {
-    no_count = snapshot.val();
+    vote_android = snapshot.val();
     drawChart();
   })
   
-  // WHAT?
-  var number = firebase.database().ref('what_count/');
+  // WEB
+  var number = firebase.database().ref('vote/web');
   number.on('value', function(snapshot) {
-    what_count = snapshot.val();
+    vote_web = snapshot.val();
+    drawChart();
+  })
+  
+  // ACMW
+  var number = firebase.database().ref('vote/acmw');
+  number.on('value', function(snapshot) {
+    vote_acmw = snapshot.val();
+    drawChart();
+  })
+  
+  // AI
+  var number = firebase.database().ref('vote/ai');
+  number.on('value', function(snapshot) {
+    vote_ai = snapshot.val();
+    drawChart();
+  })
+  
+  // CPC
+  var number = firebase.database().ref('vote/cpc');
+  number.on('value', function(snapshot) {
+    vote_cpc = snapshot.val();
     drawChart();
   })
   
@@ -74,23 +98,29 @@
   function drawChart() {
     console.log("In draw chart");
   
-    if (yes_count > 0 || no_count > 0 || other_count > 0) {
-        var results_array = [['Spaces or Tabs?', 'Votes']];
+    if (vote_web > 0 || vote_android > 0 || vote_game > 0 || vote_cpc > 0 || vote_ai > 0 || vote_acmw > 0) {
+        var results_array = [['What is the best committee?', 'Votes']];
         
-        if(yes_count > 0)
-            results_array.push(['Spaces', yes_count]);
-        if(no_count > 0)
-            results_array.push(['Tabs', no_count]);
-        if(what_count > 0)
-            results_array.push(['I am a freshman and do not understand this question', what_count]);
-            
+        if(vote_web > 0)
+            results_array.push(['Web Dev', vote_web]);
+        if(vote_android > 0)
+            results_array.push(['Android', vote_android]);
+        if(vote_game > 0)
+            results_array.push(['Animation/Game Design', vote_game]);
+        if(vote_cpc > 0)
+            results_array.push(['CPC', vote_cpc]);
+        if(vote_ai > 0)
+            results_array.push(['AI', vote_ai]);
+        if(vote_acmw > 0)
+            results_array.push(['ACM-W', vote_acmw]);
+           
         console.log(results_array);
             
         
         var data = google.visualization.arrayToDataTable(results_array);
 
         var options = {
-          title: 'Spaces or Tabs?'
+          title: 'What is the best committee?'
         };
 
         document.getElementById("piechart").innerHTML = "";
