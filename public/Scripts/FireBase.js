@@ -34,6 +34,36 @@
   })
   
   
+  var vote_yes = 0;
+  var vote_no = 0;
+  var vote_what = 0;
+  
+  // YES
+  var number = firebase.database().ref('yes_count');
+  number.on('value', function(snapshot) {
+    vote_yes = snapshot.val();
+    drawChartHarambre();
+  })
+  
+  // NO
+  var number = firebase.database().ref('no_count');
+  number.on('value', function(snapshot) {
+    vote_no = snapshot.val();
+    drawChartHarambre();
+  })
+  
+  // WHAT
+  var number = firebase.database().ref('what_count');
+  number.on('value', function(snapshot) {
+    vote_what = snapshot.val();
+    drawChartHarambre();
+  })
+  
+  
+  
+  /*
+  
+  
   var vote_game = 0;
   var vote_android = 0;
   var vote_web = 0;
@@ -82,6 +112,7 @@
     vote_cpc = snapshot.val();
     drawChart();
   })
+  */
   
   
   
@@ -94,6 +125,36 @@
     //alert(num);
     document.getElementById("comment_text").innerHTML = value;
   })
+  
+  
+  function drawChartHarambre() {
+    console.log("In draw chart");
+  
+    if (vote_yes > 0 || vote_no > 0 || vote_what > 0) {
+        var results_array = [['Is Harambe still alive?', 'Votes']];
+        
+        if(vote_yes > 0)
+            results_array.push(['Yes', vote_yes]);
+        if(vote_no > 0)
+            results_array.push(['No', vote_no]);
+        if(vote_what > 0)
+            results_array.push(["Who's Harambe?", vote_what]);
+           
+        console.log(results_array);
+            
+        
+        var data = google.visualization.arrayToDataTable(results_array);
+
+        var options = {
+          title: 'Is Harambe still alive?'
+        };
+
+        document.getElementById("piechart").innerHTML = "";
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+    }
+  }
   
   function drawChart() {
     console.log("In draw chart");
