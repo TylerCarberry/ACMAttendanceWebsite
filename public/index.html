@@ -1,36 +1,38 @@
-<head
-	<meta charset = "utf-8" />
-	<title>ACM Sign-In</title>
-    <link rel="shortcut icon" href="Logo.png">
-    <link rel="stylesheet" href="StyleSheets/Main.css">
-
- 
-<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
-<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase-database.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script type="text/javascript" src="https://www.google.com/jsapi?autoload= 
-{'modules':[{'name':'visualization','version':'1.1','packages':
-['corechart']}]}"></script>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-  google.charts.load('current', {packages: ['corechart']});
-  google.charts.setOnLoadCallback(null);
-</script>
-<script src="Scripts/FireBase.js"></script>
-     
-</head>
-
-
-<H1 id="title" onclick="drawChart(1,2,3)">Sign in to the meeting: <a href="https://goo.gl/hjbPEF">goo.gl/hjbPEF</a>
-    or <img src="https://goo.gl/hjbPEF.qr" alt="QR Code" width="150" height="150">
-</H1>
-
-<H2 id="signed_in">How many people signed into this meeting: Unknown</H2>
-<H2 id="first_meeting">Number of new members: Unknown</H2>
-
-<div id="piechart"></div>
-</body>
-
-
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>ACM Sign-In</title>
+    <link rel="shortcut icon" href="img/rowan_acm_logo.png">
+    <link rel="stylesheet" href="css/main.css">
+		<link href="https://fonts.googleapis.com/css?family=Catamaran:700" rel="stylesheet">
+		<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase-database.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['corechart']}]}"></script>
+		<script src="https://www.gstatic.com/charts/loader.js"></script>
+		<script>
+  		google.charts.load('current', {packages: ['corechart']});
+  		google.charts.setOnLoadCallback(null);
+		</script>
+		<script src="scripts/firebase.js"></script>
+	</head>
+	<body>
+		<header>
+			<div class="header_center">
+				<img class="logo" src="img/acm_logo.png">
+				<h1 class="main_header">Rowan ACM</h1>
+			</div>
+		</header>
+		<div class="body_first_half">
+			<h1 id="title" onclick="drawChart(1,2,3)">Sign in @ <a href="https://goo.gl/hjbPEF">goo.gl/hjbPEF</a> or</h1>
+			<img src="https://goo.gl/hjbPEF.qr" alt="QR Code" width="150" height="150">
+			<h2 id="signed_in">How many people signed into this meeting: Unknown</h2>
+			<h2 id="first_meeting">Number of new members: Unknown</h2>
+		</div>
+		<div class="body_second_half">
+			<div id="piechart"></div>
+		</div>
+	</body>
+</html>
