@@ -15,14 +15,14 @@ var signed_in_ref = firebase.database().ref('signed_in_count/');
 signed_in_ref.on('value', function(snapshot) {
     var signed_in_value = snapshot.val();
     document.getElementById("signed_in").innerHTML = "How many people signed into this meeting: " + signed_in_value;
-})
+});
 
 
 var new_members_ref = firebase.database().ref('new_members_count/');
 new_members_ref.on('value', function(snapshot) {
     var first_value = snapshot.val();
     document.getElementById("first_meeting").innerHTML = "Number of new members: " + first_value;
-})
+});
 
 
 var vote_yes = 0;
@@ -34,45 +34,45 @@ var number = firebase.database().ref('yes_count');
 number.on('value', function(snapshot) {
     vote_yes = snapshot.val();
     drawChartHarambre();
-})
+});
 
 // NO
 var number = firebase.database().ref('no_count');
 number.on('value', function(snapshot) {
     vote_no = snapshot.val();
     drawChartHarambre();
-})
+});
 
 // WHAT
 var number = firebase.database().ref('what_count');
 number.on('value', function(snapshot) {
     vote_what = snapshot.val();
     drawChartHarambre();
-})
+});
 
 
 var comment = firebase.database().ref('comment/');
 comment.on('value', function(snapshot) {
     var value = snapshot.val();
     document.getElementById("comment_text").innerHTML = value;
-})
+});
 
 
 function drawChartHarambre() {
     var question = 'Is Harambe still alive?';
-    
+
     if (vote_yes > 0 || vote_no > 0 || vote_what > 0) {
         var results_array = [[question, 'Votes']];
-    
+
         if(vote_yes > 0)
             results_array.push(['Yes', vote_yes]);
         if(vote_no > 0)
             results_array.push(['No', vote_no]);
         if(vote_what > 0)
             results_array.push(["Who's Harambe?", vote_what]);
-       
+
         console.log(results_array);
-        
+
         var data = google.visualization.arrayToDataTable(results_array);
 
         var options = {
@@ -92,7 +92,7 @@ function drawChart() {
 
     if (vote_web > 0 || vote_android > 0 || vote_game > 0 || vote_cpc > 0 || vote_ai > 0 || vote_acmw > 0) {
         var results_array = [['What is the best committee?', 'Votes']];
-    
+
         if(vote_web > 0)
             results_array.push(['Web Dev', vote_web]);
         if(vote_android > 0)
@@ -105,9 +105,9 @@ function drawChart() {
             results_array.push(['AI', vote_ai]);
         if(vote_acmw > 0)
             results_array.push(['ACM-W', vote_acmw]);
-       
+
         console.log(results_array);
-    
+
         var data = google.visualization.arrayToDataTable(results_array);
 
         var options = {
@@ -122,10 +122,10 @@ function drawChart() {
 }
 
 google.visualization.events.addListener(chart, 'ready', function() {
-    console.log("In listener")
-    drawChart()
+    console.log("In listener");
+    drawChart();
 });
 
 $(window).load(function() {
-    drawChart()
+    drawChart();
 });
