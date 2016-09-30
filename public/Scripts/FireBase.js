@@ -25,51 +25,53 @@ new_members_ref.on('value', function(snapshot) {
 });
 
 
-var vote_yes = 0;
-var vote_no = 0;
-var vote_what = 0;
+var assembly_count = 0;
+var brainfuck_count = 0;
+var malbolge_count = 0;
+var java_count = 0;
 
-// YES
-var number = firebase.database().ref('yes_count');
+// Assembly
+var number = firebase.database().ref('poll/assembly_count');
 number.on('value', function(snapshot) {
-    vote_yes = snapshot.val();
-    drawChartHarambre();
+    assembly_count = snapshot.val();
+    drawChartPoll();
 });
 
-// NO
-var number = firebase.database().ref('no_count');
+// Brainfuck
+var number = firebase.database().ref('poll/brainfuck_count');
 number.on('value', function(snapshot) {
-    vote_no = snapshot.val();
-    drawChartHarambre();
+    brainfuck_count = snapshot.val();
+    drawChartPoll();
 });
 
-// WHAT
-var number = firebase.database().ref('what_count');
+// Malbolge
+var number = firebase.database().ref('poll/malbolge_count');
 number.on('value', function(snapshot) {
-    vote_what = snapshot.val();
-    drawChartHarambre();
+    malbolge_count = snapshot.val();
+    drawChartPoll();
 });
 
-
-var comment = firebase.database().ref('comment/');
-comment.on('value', function(snapshot) {
-    var value = snapshot.val();
-    document.getElementById("comment_text").innerHTML = value;
+// Java
+var number = firebase.database().ref('poll/java_count');
+number.on('value', function(snapshot) {
+    java_count = snapshot.val();
+    drawChartPoll();
 });
 
+function drawChartPoll() {
+    var question = 'What is the WORST programming language?';
 
-function drawChartHarambre() {
-    var question = 'Is Harambe still alive?';
-
-    if (vote_yes > 0 || vote_no > 0 || vote_what > 0) {
+    if (assembly_count > 0 || brainfuck_count > 0 || malbolge_count > 0 || java_count > 0) {
         var results_array = [[question, 'Votes']];
 
-        if(vote_yes > 0)
-            results_array.push(['Yes', vote_yes]);
-        if(vote_no > 0)
-            results_array.push(['No', vote_no]);
-        if(vote_what > 0)
-            results_array.push(["Who's Harambe?", vote_what]);
+        if(assembly_count > 0)
+            results_array.push(['Assembly', assembly_count]);
+        if(brainfuck_count > 0)
+            results_array.push(['Brainfuck', brainfuck_count]);
+        if(malbolge_count > 0)
+            results_array.push(["Malbolge", malbolge_count]);
+        if(java_count > 0)
+            results_array.push(["Java", java_count]);
 
         console.log(results_array);
 
@@ -121,11 +123,11 @@ function drawChart() {
     }
 }
 
-google.visualization.events.addListener(chart, 'ready', function() {
-    console.log("In listener");
-    drawChart();
-});
+//google.visualization.events.addListener(chart, 'ready', function() {
+//    console.log("In listener");
+//    drawChart();
+//});
 
 $(window).load(function() {
-    drawChart();
+    drawChartPoll();
 });
