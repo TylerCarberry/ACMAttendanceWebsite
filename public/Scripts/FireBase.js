@@ -24,6 +24,14 @@ new_members_ref.on('value', function(snapshot) {
     document.getElementById("first_meeting").innerHTML = "Number of new members: " + first_value;
 });
 
+var new_members_ref = firebase.database().ref('poll_url/');
+new_members_ref.on('value', function(snapshot) {
+    var poll_url = snapshot.val();
+    document.getElementById("poll_url").innerHTML = poll_url;
+    $("#poll_qr").attr("src", poll_url+".qr");
+    
+});
+
 
 var poll_question = "Loading poll question...";
 var assembly_count = 0;
