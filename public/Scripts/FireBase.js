@@ -34,10 +34,7 @@ new_members_ref.on('value', function(snapshot) {
 
 
 var poll_question = "Loading poll question...";
-var assembly_count = 0;
-var brainfuck_count = 0;
-var malbolge_count = 0;
-var java_count = 0;
+var poll_results = null;
 
 // Poll Question
 var number = firebase.database().ref('poll_question');
@@ -46,46 +43,27 @@ number.on('value', function(snapshot) {
     drawChartPoll();
 });
 
-// Assembly
-var number = firebase.database().ref('poll/assembly_count');
+// Poll Results
+var number = firebase.database().ref('poll');
 number.on('value', function(snapshot) {
-    assembly_count = snapshot.val();
-    drawChartPoll();
-});
-
-// Brainfuck
-var number = firebase.database().ref('poll/brainfuck_count');
-number.on('value', function(snapshot) {
-    brainfuck_count = snapshot.val();
-    drawChartPoll();
-});
-
-// Malbolge
-var number = firebase.database().ref('poll/malbolge_count');
-number.on('value', function(snapshot) {
-    malbolge_count = snapshot.val();
-    drawChartPoll();
-});
-
-// Java
-var number = firebase.database().ref('poll/java_count');
-number.on('value', function(snapshot) {
-    java_count = snapshot.val();
+    poll_results = snapshot.val();
+    console.log(poll_results);
     drawChartPoll();
 });
 
 function drawChartPoll() {
-    if (assembly_count > 0 || brainfuck_count > 0 || malbolge_count > 0 || java_count > 0) {
+    if (poll_results != null) {
         var results_array = [[poll_question, 'Votes']];
-
-        if(assembly_count > 0)
-            results_array.push(['Assembly', assembly_count]);
-        if(brainfuck_count > 0)
-            results_array.push(['Brainfuck', brainfuck_count]);
-        if(malbolge_count > 0)
-            results_array.push(["Malbolge", malbolge_count]);
-        if(java_count > 0)
-            results_array.push(["Java", java_count]);
+        
+        for (var key in poll_results) {
+            if (poll_results.hasOwnProperty(key)) {
+                var name = poll_results[key].name;
+                var votes = poll_results[key].votes;
+                
+                if(votes > 0)
+                    results_array.push([name, votes]);
+            }
+        }
 
         console.log(results_array);
 
