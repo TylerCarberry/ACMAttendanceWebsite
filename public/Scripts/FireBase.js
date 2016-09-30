@@ -25,10 +25,18 @@ new_members_ref.on('value', function(snapshot) {
 });
 
 
+var poll_question = "Loading poll question...";
 var assembly_count = 0;
 var brainfuck_count = 0;
 var malbolge_count = 0;
 var java_count = 0;
+
+// Poll Question
+var number = firebase.database().ref('poll_question');
+number.on('value', function(snapshot) {
+    poll_question = snapshot.val();
+    drawChartPoll();
+});
 
 // Assembly
 var number = firebase.database().ref('poll/assembly_count');
@@ -59,10 +67,8 @@ number.on('value', function(snapshot) {
 });
 
 function drawChartPoll() {
-    var question = 'What is the WORST programming language?';
-
     if (assembly_count > 0 || brainfuck_count > 0 || malbolge_count > 0 || java_count > 0) {
-        var results_array = [[question, 'Votes']];
+        var results_array = [[poll_question, 'Votes']];
 
         if(assembly_count > 0)
             results_array.push(['Assembly', assembly_count]);
@@ -78,7 +84,7 @@ function drawChartPoll() {
         var data = google.visualization.arrayToDataTable(results_array);
 
         var options = {
-          title: question
+          title: poll_question
         };
 
         document.getElementById("piechart").innerHTML = "";
