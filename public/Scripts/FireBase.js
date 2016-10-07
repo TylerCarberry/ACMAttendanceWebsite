@@ -27,6 +27,8 @@ poll_url_ref.on('value', function(snapshot) {
     var poll_url = snapshot.val();
     document.getElementById("poll_url").innerHTML = poll_url;
     $("#poll_qr").attr("src", poll_url+".qr");
+    $("#poll_url").attr("href", poll_url);
+    
 });
 
 var poll_question = "Loading poll question...";
