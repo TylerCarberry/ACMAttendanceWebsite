@@ -22,14 +22,14 @@ new_members_ref.on('value', function(snapshot) {
 });
 
 // Get the short url (goo.gl) of the Google Form
-var poll_url_ref = firebase.database().ref('poll_url/');
-poll_url_ref.on('value', function(snapshot) {
-    var poll_url = snapshot.val();
-    document.getElementById("poll_url").innerHTML = poll_url;
-    $("#poll_qr").attr("src", poll_url+".qr");
-    $("#poll_url").attr("href", poll_url);
-    
-});
+// var poll_url_ref = firebase.database().ref('poll_url/');
+// poll_url_ref.on('value', function(snapshot) {
+//     var poll_url = snapshot.val();
+//     document.getElementById("poll_url").innerHTML = poll_url;
+//     $("#poll_qr").attr("src", poll_url+".qr");
+//     $("#poll_url").attr("href", poll_url);
+//     
+// });
 
 var poll_question = "Loading poll question...";
 var poll_results = null;
