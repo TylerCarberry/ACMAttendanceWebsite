@@ -1,5 +1,3 @@
-window.onload = function() { init() };
-
 var public_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1CKFtRiI4F_vvP5m90MlUpgwTN-6EV80PmytICB5cwko/pubhtml';
 
 var theData = null;
@@ -9,13 +7,16 @@ var poll_results = {};
 var poll_question = "Who is going to win the World Series?"
 
 function init() {
-Tabletop.init( { key: public_spreadsheet_url,
+    Tabletop.init( { key: public_spreadsheet_url,
                     callback: calculateResults,
                     simpleSheet: true } )
 }
 
 function calculateResults(data, tabletop) {
     theData = data;
+    new_member_count = 0
+    signed_in_count = 0
+    poll_results = {}
 
     //alert("Successfully processed!")
     console.log(data);
@@ -43,6 +44,8 @@ function calculateResults(data, tabletop) {
     
     updateSignInCount()
     drawChartPoll()
+    
+    setTimeout(function() { init() }, 2000);
 }
 
 function updateSignInCount() {
@@ -82,5 +85,6 @@ function drawChartPoll() {
 // When the page has loaded, draw the piechart
 // This is needed in case the attendance has loaded before the page
 $(window).load(function() {
+    init();
     drawChartPoll();
 });
