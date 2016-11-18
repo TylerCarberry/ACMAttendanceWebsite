@@ -1,10 +1,12 @@
-var public_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1CKFtRiI4F_vvP5m90MlUpgwTN-6EV80PmytICB5cwko/pubhtml';
+// ACM
+
+var public_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1cFTIl6Xy8vsSneUq8DOwUpJmGcO2atZFndHlJvli89Q/pubhtml';
 
 var theData = null;
 var signed_in_count = 0;
 var new_member_count = 0;
 var poll_results = {};
-var poll_question = "Who is going to win the World Series?"
+var poll_question = "Loading poll question"
 
 function init() {
     Tabletop.init( { key: public_spreadsheet_url,
@@ -17,10 +19,20 @@ function calculateResults(data, tabletop) {
     new_member_count = 0
     signed_in_count = 0
     poll_results = {}
+    
+    if(theData[0] != null) {
+    	keys = Object.keys(theData[0]);
+    	for(keyIndex in keys) {
+    		key = keys[keyIndex];
+    		console.log(key);
+    		if(key.toLowerCase().startsWith("weekly poll")) {
+    			poll_question = key;
+    		}
+    	}
+    }
 
     //alert("Successfully processed!")
     console.log(data);
-    
     
     for (personCount in data) {
         person = data[personCount];
@@ -34,7 +46,7 @@ function calculateResults(data, tabletop) {
         if(newMember === "Yes")
             new_member_count += 1;
             
-        poll_answer = person["Who is going to win the World Series?"]
+        poll_answer = person[poll_question]
         if(poll_answer in poll_results)
             poll_results[poll_answer] += 1
         else
