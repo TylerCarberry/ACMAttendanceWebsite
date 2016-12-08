@@ -24,7 +24,7 @@ function calculateResults(data, tabletop) {
     	keys = Object.keys(theData[0]);
     	for(keyIndex in keys) {
     		key = keys[keyIndex];
-    		console.log(key);
+    		//console.log(key);
     		if(key.toLowerCase().startsWith("weekly poll")) {
     			poll_question = key;
     		}
@@ -32,7 +32,7 @@ function calculateResults(data, tabletop) {
     }
 
     //alert("Successfully processed!")
-    console.log(data);
+    //console.log(data);
     
     for (personCount in data) {
         person = data[personCount];
