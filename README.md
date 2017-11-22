@@ -1,7 +1,5 @@
 # ACM Attendance Website
 
-Used to sign in to the ACM Meetings.
+A website that allows members of Rowan ACM to sign in to the meetings from their phone. This repo has been archived and combined with the main ACM website. You could find the new repo [here](https://github.com/RowanACM/ACMApp)
 
-[acm-attendance.firebaseapp.com](http://acm-attendance.firebaseapp.com)
-or 
-[mordor.us](http://mordor.us)
+Made by [Tyler Carberry](https://github.com/TylerCarberry)
